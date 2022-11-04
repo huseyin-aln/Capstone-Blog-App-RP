@@ -6,25 +6,34 @@ import CardActions from "@mui/material/CardActions";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
+import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubble";
 import { AccountCircle } from "@mui/icons-material";
 import { useParams, useNavigate } from "react-router-dom";
-// import { AuthContext } from "../contexts/AuthContext";
+import { AuthContext } from "../contexts/AuthContext";
 import { Container } from "@mui/material";
 import { toastErrorNotify } from "../helpers/toastNotify";
 import placeholder from "../assets/placeholder.png";
+import moment from "moment/moment";
 
-export default function BlogCard({ blogCard }) {
-  const { id } = useParams();
+export default function BlogCard({ post }) {
+  const {
+    id,
+    author,
+    content,
+    get_comment_count,
+    get_like_count,
+    image,
+    published_date,
+    title,
+  } = post;
+  // const { id } = useParams();
   const navigate = useNavigate();
-  // const { currentUser } = useContext(AuthContext);
-
-  const { author, content, date, image, title } = blogCard;
+  const { currentUser } = useContext(AuthContext);
 
   const handleClick = () => {
-    navigate(`/details/${id}`, { state: blogCard });
+    navigate(`/details/${id}`);
 
-    // !currentUser && toastErrorNotify("Please log in to see detail!");
+    !currentUser && toastErrorNotify("Please log in to see detail!");
   };
 
   return (
@@ -56,7 +65,7 @@ export default function BlogCard({ blogCard }) {
             color="textSecondary"
             sx={{ fontFamily: "Girassol" }}
           >
-            {date[1] + " " + date[2] + ", " + date[3]}
+            {moment(published_date).format("MMM DD, YYYY")}
           </Typography>
           <Typography
             variant="body2"
@@ -81,13 +90,19 @@ export default function BlogCard({ blogCard }) {
           </Typography>
         </CardActions>
 
-        <CardActions disableSpacing>
+        <CardActions>
           <IconButton aria-label="add to favorites">
-            <FavoriteIcon />
+            <FavoriteIcon color={get_like_count > 0 ? "error" : "disabled"} />
           </IconButton>
-          <IconButton aria-label="comment">
-            <ChatBubbleIcon />
+          <Typography variant="body2" color="textSecondary">
+            {get_like_count}
+          </Typography>
+          <IconButton aria-label="comment count">
+            <ChatBubbleOutlineIcon />
           </IconButton>
+          <Typography variant="body2" color="textSecondary">
+            {get_comment_count}
+          </Typography>
         </CardActions>
       </Card>
     </Container>

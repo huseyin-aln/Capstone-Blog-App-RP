@@ -5,24 +5,33 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 // import { AddBlog } from "../helpers/firebase";
 import { useNavigate } from "react-router-dom";
-// import { AuthContext } from "../contexts/AuthContext";
+import { AuthContext } from "../contexts/AuthContext";
 import blogPng from "../assets/blok.png";
 import Typography from "@mui/material/Typography";
 import { toastSuccessNotify, toastErrorNotify } from "../helpers/toastNotify";
-
-
-const initialValues = { title: "", image: "", content: "" };
+import { BlogContext } from "../contexts/BlogContext";
 
 export default function NewBlog() {
-  const [info, setInfo] = useState(initialValues);
+  const { currentUser } = useContext(AuthContext);
+
+  const [newBlog, setNewBlog] = useState({
+    author: currentUser.email,
+    title: "",
+    content: "",
+    get_comment_count: 0,
+    get_like_count: 0,
+    image: "",
+    published_date: Date.now(),
+  });
+  const { addBlog } = useContext(BlogContext);
+
   const navigate = useNavigate();
-  // const { currentUser } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     try {
-      // AddBlog(info);
-      setInfo(initialValues);
+      addBlog(newBlog);
+      // setInfo(initialValues);
       navigate("/");
       toastSuccessNotify("Blog added successfully!");
     } catch (error) {
@@ -37,19 +46,19 @@ export default function NewBlog() {
   //   console.log(currentUser);
   // }, [currentUser]);
 
-  const handleChange = (e) => {
-    e.preventDefault();
-    const name = e.target.name;
-    const value = e.target.value;
-    setInfo({
-      ...info,
-      [name]: value,
-      date: date,
-      like: 0,
-      comment: 0,
-      // author: currentUser.email,
-    });
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   const name = e.target.name;
+  //   const value = e.target.value;
+  //   // setInfo({
+  //   //   ...info,
+  //   //   [name]: value,
+  //   //   date: date,
+  //   //   like: 0,
+  //   //   comment: 0,
+  //   //   // author: currentUser.email,
+  //   // });
+  // };
 
   return (
     <Box
@@ -85,10 +94,10 @@ export default function NewBlog() {
         label="Title"
         type="text"
         name="title"
-        value={info.title}
+        value={newBlog.title}
         sx={{ width: "20rem" }}
         autoFocus
-        onChange={handleChange}
+        onChange={(e) => setNewBlog({ ...newBlog, title: e.target.value })}
       />
       <TextField
         autoComplete="given-image"
@@ -96,9 +105,9 @@ export default function NewBlog() {
         label="Image URL"
         type="text"
         name="image"
-        value={info.image}
+        value={newBlog.image}
         sx={{ width: "20rem" }}
-        onChange={handleChange}
+        onChange={(e) => setNewBlog({ ...newBlog, image: e.target.value })}
       />
 
       <TextField
@@ -106,11 +115,11 @@ export default function NewBlog() {
         id="content-input"
         label="Content"
         name="content"
-        value={info.content}
+        value={newBlog.content}
         multiline
         rows={6}
         sx={{ width: "20rem" }}
-        onChange={handleChange}
+        onChange={(e) => setNewBlog({ ...newBlog, content: e.target.value })}
       />
       <Button
         variant="contained"
