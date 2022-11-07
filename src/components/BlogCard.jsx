@@ -10,7 +10,7 @@ import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubble";
 import { AccountCircle } from "@mui/icons-material";
 import { useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
-import { Container } from "@mui/material";
+import { CardActionArea, Container } from "@mui/material";
 import { toastErrorNotify } from "../helpers/toastNotify";
 import placeholder from "../assets/placeholder.png";
 import moment from "moment/moment";
@@ -30,15 +30,15 @@ export default function BlogCard({ post }) {
   const navigate = useNavigate();
   const { currentUser } = useContext(AuthContext);
 
-  const handleClick = () => {
-    navigate(`/details/${id}`);
-
+  const openDetails = () => {
     !currentUser && toastErrorNotify("Please log in to see detail!");
+    navigate(`/details/${id}`);
   };
 
   return (
     <Container sx={{ display: "flex", justifyContent: "center" }}>
-      <Card sx={{ maxWidth: 300, height: 500 }} onClick={handleClick}>
+      <Card sx={{ maxWidth: 300, height: 500 }} >
+        <CardActionArea onClick={openDetails}>
         <CardMedia
           component="img"
           image={image || placeholder}
@@ -80,6 +80,11 @@ export default function BlogCard({ post }) {
             {content}
           </Typography>
         </CardContent>
+        </CardActionArea>
+        
+
+
+
 
         <CardActions>
           <AccountCircle

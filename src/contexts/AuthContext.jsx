@@ -7,11 +7,21 @@ export const AuthContext = createContext();
 const url = "http://127.0.0.1:8000/";
 
 const AuthContextProvider = (props) => {
+  const [currentUser, setCurrentUser] = useState(
+    sessionStorage.getItem("username") || false
+  );
+  const [myKey, setMyKey] = useState(
+    window.atob(sessionStorage.getItem("token")) || false
+  );
 
-  const [currentUser, setCurrentUser] = useState(sessionStorage.getItem('username') || false);
-  const [myKey, setMyKey] = useState(window.atob(sessionStorage.getItem('token')) || false);
-
-  const createUser = async (email, password, firstName, lastName, userName, navigate) => {
+  const createUser = async (
+    email,
+    password,
+    firstName,
+    lastName,
+    userName,
+    navigate
+  ) => {
     try {
       const res = await axios.post(`${url}users/register/`, {
         username: userName,
@@ -30,7 +40,7 @@ const AuthContextProvider = (props) => {
         const myToken = window.btoa(res.data.token);
         sessionStorage.setItem("token", myToken);
         toastSuccessNotify("User registered successfully!");
-        navigate("/")
+        navigate("/");
       }
     } catch (error) {
       toastErrorNotify("Something went wrong!");
@@ -68,20 +78,20 @@ const AuthContextProvider = (props) => {
         email: email,
         password: password,
       });
-      console.log(res);
-      
+      // console.log(res);
+
       if (res.data.key) {
-        console.log(res);
+        // console.log(res);
         setMyKey(res.data.key);
         setCurrentUser(res.data.user.username);
         sessionStorage.setItem("username", res.data.user.username);
         const myToken = window.btoa(res.data.key);
         sessionStorage.setItem("token", myToken);
         toastSuccessNotify("User login successfully!");
-        navigate("/")
+        navigate("/");
       }
     } catch (error) {
-      console.log(error);
+      toastErrorNotify("Something went wrong!");
     }
   };
 
@@ -91,19 +101,19 @@ const AuthContextProvider = (props) => {
         method: "post",
         url: `${url}users/auth/logout/`,
         headers: {
-          Authorization: `Token ${myKey}`
-        }
+          Authorization: `Token ${myKey}`,
+        },
       };
-      const res = await axios(config)
+      const res = await axios(config);
       if (res.status === 200) {
-        setCurrentUser(false)
-        setMyKey(false)
-        sessionStorage.clear()
+        setCurrentUser(false);
+        setMyKey(false);
+        sessionStorage.clear();
         toastSuccessNotify("User logged out successfully!");
-        navigate("/login")
+        navigate("/login");
       }
     } catch (error) {
-      console.log(error);
+      toastErrorNotify("Something went wrong!");
     }
   };
 

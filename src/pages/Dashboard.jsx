@@ -49,7 +49,12 @@ const Dashboard = () => {
               sx={{ paddingTop: "2rem" }}
             >
               {currentBlogs?.map((item, id) => (
-                <Grid item xs={12} sm={6} md={4} spacing={2} key={id}>
+                <Grid item 
+                xs={12} 
+                sm={6} 
+                md={4} 
+                spacing={2} 
+                key={id}>
                   <BlogCard post={item} />
                 </Grid>
               ))}

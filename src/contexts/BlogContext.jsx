@@ -1,6 +1,10 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
-import { toastErrorNotify, toastSuccessNotify } from "../helpers/toastNotify";
+import {
+  toastErrorNotify,
+  toastSuccessNotify,
+  toastWarnNotify,
+} from "../helpers/toastNotify";
 import { AuthContext } from "./AuthContext";
 
 export const BlogContext = createContext();
@@ -15,11 +19,13 @@ const BlogContextProvider = ({ children }) => {
   const mainBlogs = async () => {
     try {
       const res = await axios.get(`${url}blog/blog/`);
-      console.log(res);
-      // return res.data;
-      setCurrentBlogs(res.data);
+      // console.log(res.data[0].id);
+      if (res.status === 200) {
+        setCurrentBlogs(res.data);
+        // console.log(res.data);
+      }
     } catch (error) {
-      console.log(error);
+      toastErrorNotify("Something went wrong!");
     }
   };
 
@@ -50,10 +56,56 @@ const BlogContextProvider = ({ children }) => {
           },
         }
       );
-      return res.data;
+      // return res.data;
       // console.log(res.data);
+      if (res.status === 200) {
+        setCurrentBlogs(...currentBlogs, res.data);
+        toastSuccessNotify("Blog added successfully!");
+      }
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const getOneBlog = (id) => {
+    // try {
+    //   const res = await axios.get(`${url}blog/blog/${id}/`, {
+    //     headers: {
+    //       Authorization: `Token ${myKey}`,
+    //     },
+    //   });
+    //   console.log(res);
+
+    //   if (res.status === 200) {
+    //     // console.log(res.data);
+
+    //     // return res.data;
+    //     setBlogDetail(res.data);
+    //   }
+    // } catch (error) {
+    //   console.log(error.response.data);
+    // }
+
+    // console.log(currentBlogs);
+
+    const result = currentBlogs?.filter((item) => item.id == id);
+
+    return result;
+    // console.log(result);
+  };
+
+  const deleteBlog = async (id) => {
+    try {
+      const res = await axios.delete(`${url}blog/blog/${id}/`, {
+        headers: {
+          Authorization: `Token ${myKey}`,
+        },
+      });
+      if (res.status === 204) {
+        toastSuccessNotify("Your blog successfully deleted ");
+      } else toastSuccessNotify("Your blog successfully deleted ");
+    } catch (error) {
+      toastWarnNotify(error);
     }
   };
 
@@ -65,6 +117,8 @@ const BlogContextProvider = ({ children }) => {
   let value = {
     addBlog,
     currentBlogs,
+    getOneBlog,
+    deleteBlog,
   };
 
   return <BlogContext.Provider value={value}>{children}</BlogContext.Provider>;
