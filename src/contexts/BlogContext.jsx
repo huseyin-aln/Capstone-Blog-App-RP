@@ -102,10 +102,56 @@ const BlogContextProvider = ({ children }) => {
         },
       });
       if (res.status === 204) {
-        toastSuccessNotify("Your blog successfully deleted ");
-      } else toastSuccessNotify("Your blog successfully deleted ");
+        toastSuccessNotify("Deleted successfully!");
+      } else toastWarnNotify("Someting went wrong please try again!");
     } catch (error) {
       toastWarnNotify(error);
+    }
+  };
+
+  const updateBlog = async (id, author, title, image, content) => {
+    try {
+      const res = await axios.patch(
+        `${url}blog/blog/${id}/`,
+        {
+          author: author,
+          title: title,
+          content: content,
+          image: image,
+        },
+        {
+          headers: {
+            Authorization: `Token ${myKey}`,
+          },
+        }
+      );
+
+      // var data = {
+      //   id: 17,
+      //   author: author,
+      //   title: title,
+      //   content: content,
+      //   image: image,
+      // };
+
+      // var config = {
+      //   method: "patch",
+      //   url: "http://127.0.0.1:8000/blog/blog/17/",
+      //   headers: {
+      //     Authorization: "Token ebef53bc262fd0ea2b021214b965a7d8b2a6a540",
+      //   },
+      //   data: data,
+      // };
+
+      // const res = await axios(config);
+
+      if (res.status === 200) {
+        toastSuccessNotify("Updated successfully!");
+      } else toastWarnNotify("Someting went wrong please try again!");
+    } catch (error) {
+      console.log(error.response);
+
+      // toastWarnNotify(error);
     }
   };
 
@@ -119,6 +165,7 @@ const BlogContextProvider = ({ children }) => {
     currentBlogs,
     getOneBlog,
     deleteBlog,
+    updateBlog,
   };
 
   return <BlogContext.Provider value={value}>{children}</BlogContext.Provider>;

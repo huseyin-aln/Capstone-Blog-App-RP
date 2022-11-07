@@ -38,11 +38,9 @@ const Details = () => {
   };
 
   const deleteHandler = (id) => {
-    console.log("DeleteHandler", id);
-
+    // console.log("DeleteHandler", id);
     deleteBlog(id);
     navigate("/");
-    toastSuccessNotify("Deleted successfully!");
   };
 
   // const likeClicked = async() => {
