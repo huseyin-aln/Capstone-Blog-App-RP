@@ -47,7 +47,13 @@ export default function UpdateBlog() {
 
   const updateBlogHandler = (e) => {
     e.preventDefault();
-    updateBlog(res?.id, newBlog);
+    updateBlog(
+      res?.id,
+      newBlog.author,
+      newBlog.title,
+      newBlog.content,
+      newBlog.image
+    );
     navigate(`/`);
     console.log(newBlog);
   };
@@ -87,7 +93,7 @@ export default function UpdateBlog() {
       >
         <img
           src={res?.image || placeholder}
-          alt="blok"
+          alt="blog"
           style={{
             maxWidth: 300,
             height: 200,

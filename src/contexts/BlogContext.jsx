@@ -109,11 +109,12 @@ const BlogContextProvider = ({ children }) => {
     }
   };
 
-  const updateBlog = async (id, author, title, image, content) => {
+  const updateBlog = async (id, author, title, content, image) => {
     try {
       const res = await axios.patch(
         `${url}blog/blog/${id}/`,
         {
+          id: id,
           author: author,
           title: title,
           content: content,
