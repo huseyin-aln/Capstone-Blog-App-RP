@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
@@ -18,10 +18,10 @@ export default function NewBlog() {
     author: currentUser.email,
     title: "",
     content: "",
-    get_comment_count: 0,
-    get_like_count: 0,
+    comment_count: 0,
+    likes: 0,
     image: "",
-    published_date: Date.now(),
+    publish_date: Date.now(),
   });
   const { addBlog } = useContext(BlogContext);
 
@@ -39,8 +39,8 @@ export default function NewBlog() {
     }
   };
 
-  const date = new Date().toString().split(" ").slice(0, 4);
-  console.log(date);
+  // const date = new Date().toString().split(" ").slice(0, 4);
+  // console.log(date);
 
   // useEffect(() => {
   //   console.log(currentUser);

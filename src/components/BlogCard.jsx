@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubble";
 import { AccountCircle } from "@mui/icons-material";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 import { CardActionArea, Container } from "@mui/material";
 import { toastErrorNotify } from "../helpers/toastNotify";
@@ -37,54 +37,50 @@ export default function BlogCard({ post }) {
 
   return (
     <Container sx={{ display: "flex", justifyContent: "center" }}>
-      <Card sx={{ maxWidth: 300, height: 500 }} >
+      <Card sx={{ width: 300, height: 500 }}>
         <CardActionArea onClick={openDetails}>
-        <CardMedia
-          component="img"
-          image={image || placeholder}
-          alt="image"
-          sx={{
-            maxWidth: 300,
-            height: 200,
-            objectFit: "contain",
-            display: "block",
-            margin: "auto",
-          }}
-        />
-        <CardContent style={{ backgroundColor: "#efeefe", height: "150px" }}>
-          <Typography
-            variant="h5"
-            component="h2"
-            color="#046582"
-            sx={{ fontFamily: "Girassol" }}
-          >
-            {title}
-          </Typography>
-          <Typography
-            variant="h6"
-            color="textSecondary"
-            sx={{ fontFamily: "Girassol" }}
-          >
-            {moment(published_date).format("MMM DD, YYYY")}
-          </Typography>
-          <Typography
-            variant="body2"
+          <CardMedia
+            component="img"
+            image={image || placeholder}
+            alt="image"
             sx={{
-              display: "-webkit-box",
-              WebkitBoxOrient: "vertical",
-              WebkitLineClamp: 4,
-              overflow: "hidden",
-              textOverflow: "ellipsis",
+              width: 300,
+              height: 200,
+              objectFit: "contain",
+              display: "block",
+              margin: "auto",
             }}
-          >
-            {content}
-          </Typography>
-        </CardContent>
+          />
+          <CardContent style={{ backgroundColor: "#efeefe", height: "150px" }}>
+            <Typography
+              variant="h5"
+              component="h2"
+              color="#046582"
+              sx={{ fontFamily: "Girassol" }}
+            >
+              {title}
+            </Typography>
+            <Typography
+              variant="h6"
+              color="textSecondary"
+              sx={{ fontFamily: "Girassol" }}
+            >
+              {moment(published_date).format("MMM DD, YYYY")}
+            </Typography>
+            <Typography
+              variant="body2"
+              sx={{
+                display: "-webkit-box",
+                WebkitBoxOrient: "vertical",
+                WebkitLineClamp: 4,
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+              }}
+            >
+              {content}
+            </Typography>
+          </CardContent>
         </CardActionArea>
-        
-
-
-
 
         <CardActions>
           <AccountCircle

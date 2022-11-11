@@ -33,10 +33,10 @@ const BlogContextProvider = ({ children }) => {
     author,
     title,
     content,
-    get_comment_count,
-    get_like_count,
+    comment_count,
+    likes,
     image,
-    published_date,
+    publish_date,
   }) => {
     try {
       const res = await axios.post(
@@ -45,10 +45,10 @@ const BlogContextProvider = ({ children }) => {
           author: author,
           title: title,
           content: content,
-          get_comment_count: get_comment_count,
-          get_like_count: get_like_count,
+          comment_count: comment_count,
+          likes: likes,
           image: image,
-          published_date: published_date,
+          publish_date: publish_date,
         },
         {
           headers: {
@@ -156,8 +156,23 @@ const BlogContextProvider = ({ children }) => {
     }
   };
 
+  const addLike = async (id) => {
+    try {
+      const res = await axios.post(`${url}blog/likes/${id}/`, {
+        headers: {
+          Authorization: `Token ${myKey}`,
+        },
+      });
+      if (res.status === 200) {
+        toastSuccessNotify("Like updated successfully!");
+      }
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
   useEffect(() => {
-    addBlog();
+    // addBlog();
     mainBlogs();
   }, []);
 
@@ -167,6 +182,7 @@ const BlogContextProvider = ({ children }) => {
     getOneBlog,
     deleteBlog,
     updateBlog,
+    addLike,
   };
 
   return <BlogContext.Provider value={value}>{children}</BlogContext.Provider>;

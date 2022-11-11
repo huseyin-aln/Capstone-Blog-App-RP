@@ -1,12 +1,10 @@
 import { Card, CardContent, Typography } from "@mui/material";
 import { useContext } from "react";
-// import { AuthContext } from "../contexts/AuthContext";
-import avatar from "../assets/avatar3.png"
-
+import { AuthContext } from "../contexts/AuthContext";
+import avatar from "../assets/avatar3.png";
 
 export default function SimpleCard() {
-  
-  // const { currentUser } = useContext(AuthContext);
+  const { currentUser } = useContext(AuthContext);
 
   return (
     <div
@@ -28,11 +26,11 @@ export default function SimpleCard() {
           flexDirection: "column",
           alignItems: "center",
           padding: 25,
-          backgroundColor:"#ebe4e4"
+          backgroundColor: "#ebe4e4",
         }}
       >
         <img
-          // src={currentUser?.photoURL || avatar }
+          src={currentUser?.photoURL || avatar}
           alt="profile"
           style={{ borderRadius: "50%", width: "100px" }}
         />
@@ -42,11 +40,13 @@ export default function SimpleCard() {
             Display Name
           </Typography>
           <Typography variant="h5" component="h2">
-            {/* {currentUser?.displayName || "Not Found!"} */}
+            {currentUser?.displayName || "Not Found!"}
           </Typography>
-          <Typography color="textSecondary" style={{marginBottom: 12}}>Email</Typography>
+          <Typography color="textSecondary" style={{ marginBottom: 12 }}>
+            Email
+          </Typography>
           <Typography variant="body2" component="p">
-            {/* {currentUser?.email || "Not Found!"} */}
+            {currentUser?.email || "Not Found!"}
           </Typography>
         </CardContent>
       </Card>

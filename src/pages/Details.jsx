@@ -5,7 +5,7 @@ import CardActions from "@mui/material/CardActions";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
+import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubble";
 import Container from "@mui/material/Container";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
 import { useContext } from "react";
@@ -22,7 +22,7 @@ import loadingGif from "../assets/loading.gif";
 
 const Details = () => {
   const { currentUser } = useContext(AuthContext);
-  const { getOneBlog, deleteBlog } = useContext(BlogContext);
+  const { getOneBlog, deleteBlog, addLike } = useContext(BlogContext);
 
   const navigate = useNavigate();
   const { id } = useParams();
@@ -43,9 +43,10 @@ const Details = () => {
     navigate("/");
   };
 
-  // const likeClicked = async() => {
-  //   await LikeBlog();
-  // }
+  const handleLike = (e) => {
+    addLike(id);
+  };
+
   return (
     <Container
       maxWidth="md"
@@ -75,12 +76,16 @@ const Details = () => {
             key={index}
             sx={{
               display: "flex",
-              flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
             }}
           >
-            <Card>
+            <Card
+              sx={{
+                minWidth: 250,
+                width: "75vw",
+              }}
+            >
               <CardMedia
                 component="img"
                 image={item.image || placeholder}
@@ -107,7 +112,7 @@ const Details = () => {
                   color="textSecondary"
                   sx={{ fontFamily: "Girassol" }}
                 >
-                  {moment(item.published_date).format("MMM DD, YYYY")}
+                  {moment(item.publish_date).format("MMM DD, YYYY")}
                 </Typography>
                 <Typography variant="body2">{item.content}</Typography>
               </CardContent>
@@ -118,13 +123,21 @@ const Details = () => {
               <CardActions disableSpacing>
                 <IconButton
                   aria-label="add to favorites"
-                  // onClick={likeClicked}
+                  onClick={(e) => {
+                    handleLike(e);
+                  }}
                 >
-                  <FavoriteIcon />
+                  <FavoriteIcon color={item.likes > 0 ? "error" : "disabled"} />
                 </IconButton>
-                <IconButton aria-label="comment">
-                  <ChatBubbleIcon />
+                <Typography variant="body2" color="textSecondary">
+                  {item.likes}
+                </Typography>
+                <IconButton aria-label="comment count">
+                  <ChatBubbleOutlineIcon />
                 </IconButton>
+                <Typography variant="body2" color="textSecondary">
+                  {item.comment_count}
+                </Typography>
               </CardActions>
 
               {item.author === currentUser ? (
