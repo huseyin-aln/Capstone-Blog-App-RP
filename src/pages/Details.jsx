@@ -4,11 +4,12 @@ import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
+import TextField from "@mui/material/TextField";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubble";
 import Container from "@mui/material/Container";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -22,7 +23,9 @@ import loadingGif from "../assets/loading.gif";
 
 const Details = () => {
   const { currentUser } = useContext(AuthContext);
-  const { getOneBlog, deleteBlog, addLike } = useContext(BlogContext);
+  const { getOneBlog, deleteBlog, addLike, addComment } =
+    useContext(BlogContext);
+  const [newComment, setNewComment] = useState("");
 
   const navigate = useNavigate();
   const { id } = useParams();
@@ -45,6 +48,19 @@ const Details = () => {
 
   const handleLike = (e) => {
     addLike(id);
+  };
+
+  // const handleChange = (e) => {
+  //   setNewComment(e.target.value)
+  // }
+
+  const handleSendComment = (e) => {
+    e.preventDefault();
+    const data = {
+      content: newComment,
+    };
+    addComment(data, id);
+    setNewComment("");
   };
 
   return (
@@ -126,11 +142,12 @@ const Details = () => {
                   onClick={(e) => {
                     handleLike(e);
                   }}
+                  data-id={item?.id}
                 >
                   <FavoriteIcon color={item.likes > 0 ? "error" : "disabled"} />
                 </IconButton>
                 <Typography variant="body2" color="textSecondary">
-                  {item.likes}
+                  {item?.likes?.length}
                 </Typography>
                 <IconButton aria-label="comment count">
                   <ChatBubbleOutlineIcon />
@@ -182,6 +199,29 @@ const Details = () => {
           <img src={noData} alt="no data" />
         </div>
       )}
+
+      <Box component="form" onSubmit={handleSendComment} sx={{ mt: 1 }}>
+        <TextField
+          margin="normal"
+          required
+          fullWidth
+          id="comment"
+          // label="User Name"
+          name="comment"
+          autoComplete="comment"
+          value={newComment}
+          autoFocus
+          onChange={(e) => setNewComment(e.target.value)}
+        />
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          sx={{ mt: 3, mb: 2, bgcolor: "#232F3E" }}
+        >
+          Add Comment
+        </Button>
+      </Box>
     </Container>
   );
 };

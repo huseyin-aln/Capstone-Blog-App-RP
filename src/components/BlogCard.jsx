@@ -20,10 +20,10 @@ export default function BlogCard({ post }) {
     id,
     author,
     content,
-    get_comment_count,
-    get_like_count,
+    comment_count,
+    likes,
     image,
-    published_date,
+    publish_date,
     title,
   } = post;
   // const { id } = useParams();
@@ -65,7 +65,7 @@ export default function BlogCard({ post }) {
               color="textSecondary"
               sx={{ fontFamily: "Girassol" }}
             >
-              {moment(published_date).format("MMM DD, YYYY")}
+              {moment(publish_date).format("MMM DD, YYYY")}
             </Typography>
             <Typography
               variant="body2"
@@ -93,16 +93,16 @@ export default function BlogCard({ post }) {
 
         <CardActions>
           <IconButton aria-label="add to favorites">
-            <FavoriteIcon color={get_like_count > 0 ? "error" : "disabled"} />
+            <FavoriteIcon color={likes > 0 ? "error" : "disabled"} />
           </IconButton>
           <Typography variant="body2" color="textSecondary">
-            {get_like_count}
+            {likes?.length}
           </Typography>
           <IconButton aria-label="comment count">
             <ChatBubbleOutlineIcon />
           </IconButton>
           <Typography variant="body2" color="textSecondary">
-            {get_comment_count}
+            {comment_count}
           </Typography>
         </CardActions>
       </Card>

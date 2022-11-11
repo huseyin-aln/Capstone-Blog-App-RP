@@ -13,7 +13,6 @@ import { useNavigate } from "react-router-dom";
 // import { signIn } from "../helpers/firebase";
 // import { signUpProvider } from "../helpers/firebase";
 import blogPng from "../assets/blok.png";
-import googlePng from "../assets/google.png";
 import { AuthContext } from "../contexts/AuthContext";
 
 function Copyright(props) {
@@ -37,7 +36,6 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function Login() {
-
   const { signIn } = useContext(AuthContext);
 
   const [userName, setUserName] = useState("");
@@ -49,10 +47,6 @@ export default function Login() {
     event.preventDefault();
     signIn(email, password, userName, navigate);
     // signIn(email, password, navigate);
-  };
-
-  const handleProviderLogin = () => {
-    // signUpProvider(navigate);
   };
 
   return (
@@ -163,28 +157,6 @@ export default function Login() {
                 sx={{ mt: 3, mb: 2, bgcolor: "#232F3E" }}
               >
                 Login
-              </Button>
-
-              <Button
-                fullWidth
-                variant="contained"
-                onClick={handleProviderLogin}
-                style={{
-                  backgroundColor: "white",
-                  color: "#046582",
-                  fontWeight: "bold",
-                  marginTop: 3,
-                  "&:hover": {
-                    backgroundColor: "white",
-                  },
-                }}
-              >
-                With
-                <img
-                  src={googlePng}
-                  alt="google"
-                  style={{ width: 75, marginLeft: 10 }}
-                />
               </Button>
             </Box>
           </Box>

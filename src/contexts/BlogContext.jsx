@@ -171,6 +171,21 @@ const BlogContextProvider = ({ children }) => {
     }
   };
 
+  const addComment = async (data, id) => {
+    try {
+      const res = await axios.post(`${url}blog/comments/${id}/`, data, {
+        headers: {
+          Authorization: `Token ${myKey}`,
+        },
+      });
+      if (res.status === 200) {
+        toastSuccessNotify("Like updated successfully!");
+      }
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
   useEffect(() => {
     // addBlog();
     mainBlogs();
@@ -183,6 +198,7 @@ const BlogContextProvider = ({ children }) => {
     deleteBlog,
     updateBlog,
     addLike,
+    addComment,
   };
 
   return <BlogContext.Provider value={value}>{children}</BlogContext.Provider>;
