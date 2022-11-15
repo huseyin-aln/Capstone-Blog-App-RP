@@ -56,38 +56,17 @@ const BlogContextProvider = ({ children }) => {
           },
         }
       );
-      // return res.data;
-      // console.log(res.data);
       if (res.status === 200) {
         setCurrentBlogs(...currentBlogs, res.data);
         toastSuccessNotify("Blog added successfully!");
       }
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      toastWarnNotify(error);
     }
   };
 
   const getOneBlog = (id) => {
-    // try {
-    //   const res = await axios.get(`${url}blog/blog/${id}/`, {
-    //     headers: {
-    //       Authorization: `Token ${myKey}`,
-    //     },
-    //   });
-    //   console.log(res);
-
-    //   if (res.status === 200) {
-    //     // console.log(res.data);
-
-    //     // return res.data;
-    //     setBlogDetail(res.data);
-    //   }
-    // } catch (error) {
-    //   console.log(error.response.data);
-    // }
-
-    // console.log(currentBlogs);
-
     const result = currentBlogs?.filter((item) => item.id == id);
 
     return result;
@@ -126,33 +105,12 @@ const BlogContextProvider = ({ children }) => {
           },
         }
       );
-
-      // var data = {
-      //   id: 17,
-      //   author: author,
-      //   title: title,
-      //   content: content,
-      //   image: image,
-      // };
-
-      // var config = {
-      //   method: "patch",
-      //   url: "http://127.0.0.1:8000/blog/blog/17/",
-      //   headers: {
-      //     Authorization: "Token ebef53bc262fd0ea2b021214b965a7d8b2a6a540",
-      //   },
-      //   data: data,
-      // };
-
-      // const res = await axios(config);
-
       if (res.status === 200) {
         toastSuccessNotify("Updated successfully!");
       } else toastWarnNotify("Someting went wrong please try again!");
     } catch (error) {
-      console.log(error.response);
-
-      // toastWarnNotify(error);
+      // console.log(error.response);
+      toastWarnNotify(error);
     }
   };
 
@@ -167,7 +125,8 @@ const BlogContextProvider = ({ children }) => {
         toastSuccessNotify("Like updated successfully!");
       }
     } catch (error) {
-      console.log(error.response);
+      // console.log(error.response);
+      toastWarnNotify(error);
     }
   };
 
@@ -182,12 +141,12 @@ const BlogContextProvider = ({ children }) => {
         toastSuccessNotify("Comment added successfully!");
       }
     } catch (error) {
-      console.log(error.response);
+      // console.log(error.response);
+      toastWarnNotify(error);
     }
   };
 
   useEffect(() => {
-    // addBlog();
     mainBlogs();
   }, []);
 
