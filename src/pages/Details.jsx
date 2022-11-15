@@ -26,6 +26,7 @@ const Details = () => {
   const { getOneBlog, deleteBlog, addLike, addComment } =
     useContext(BlogContext);
   const [newComment, setNewComment] = useState("");
+  const [like, setLike] = useState("");
 
   const navigate = useNavigate();
   const { id } = useParams();
@@ -47,12 +48,12 @@ const Details = () => {
   };
 
   const handleLike = (e) => {
-    addLike(id);
+    const data = {
+      post: like,
+    };
+    addLike(data, id);
+    setLike("");
   };
-
-  // const handleChange = (e) => {
-  //   setNewComment(e.target.value)
-  // }
 
   const handleSendComment = (e) => {
     e.preventDefault();

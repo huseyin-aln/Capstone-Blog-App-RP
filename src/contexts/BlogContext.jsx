@@ -156,9 +156,9 @@ const BlogContextProvider = ({ children }) => {
     }
   };
 
-  const addLike = async (id) => {
+  const addLike = async (data, id) => {
     try {
-      const res = await axios.post(`${url}blog/likes/${id}/`, {
+      const res = await axios.post(`${url}blog/likes/${id}/`, data, {
         headers: {
           Authorization: `Token ${myKey}`,
         },
@@ -179,7 +179,7 @@ const BlogContextProvider = ({ children }) => {
         },
       });
       if (res.status === 200) {
-        toastSuccessNotify("Like updated successfully!");
+        toastSuccessNotify("Comment added successfully!");
       }
     } catch (error) {
       console.log(error.response);
