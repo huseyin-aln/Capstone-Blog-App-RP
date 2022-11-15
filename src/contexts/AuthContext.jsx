@@ -47,30 +47,6 @@ const AuthContextProvider = (props) => {
     }
   };
 
-  // ----- Postman Config -----
-  // var axios = require('axios');
-  //       var data = {
-  //         "username": userName,
-  //         "email": email,
-  //         "first_name": firstName,
-  //         "last_name": lastName,
-  //         "password": password,
-  //         "password1": password
-  //       };
-  // console.log(data);
-
-  // var config = {
-  //   method: 'post',
-  //   url: 'http://127.0.0.1:8000/users/register/',
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //     // 'Cookie': 'csrftoken=uXl1MDBi9uTkDLeQDtuPNa23IB8pPTWu'
-  //   },
-  //   data : data
-  // };
-
-  // const res =  await axios(config)
-
   const signIn = async (email, password, userName, navigate) => {
     try {
       const res = await axios.post(`${url}users/auth/login/`, {

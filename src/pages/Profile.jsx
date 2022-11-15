@@ -40,13 +40,7 @@ export default function SimpleCard() {
             Display Name
           </Typography>
           <Typography variant="h5" component="h2">
-            {currentUser?.displayName || "Not Found!"}
-          </Typography>
-          <Typography color="textSecondary" style={{ marginBottom: 12 }}>
-            Email
-          </Typography>
-          <Typography variant="body2" component="p">
-            {currentUser?.email || "Not Found!"}
+            {currentUser || "Not Found!"}
           </Typography>
         </CardContent>
       </Card>
