@@ -3,7 +3,6 @@ import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-// import { AddBlog } from "../helpers/firebase";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 import blogPng from "../assets/blok.png";
@@ -31,34 +30,12 @@ export default function NewBlog() {
     e.preventDefault();
     try {
       addBlog(newBlog);
-      // setInfo(initialValues);
       navigate("/");
       toastSuccessNotify("Blog added successfully!");
     } catch (error) {
       toastErrorNotify("Blog can not be added!");
     }
   };
-
-  // const date = new Date().toString().split(" ").slice(0, 4);
-  // console.log(date);
-
-  // useEffect(() => {
-  //   console.log(currentUser);
-  // }, [currentUser]);
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   const name = e.target.name;
-  //   const value = e.target.value;
-  //   // setInfo({
-  //   //   ...info,
-  //   //   [name]: value,
-  //   //   date: date,
-  //   //   like: 0,
-  //   //   comment: 0,
-  //   //   // author: currentUser.email,
-  //   // });
-  // };
 
   return (
     <Box

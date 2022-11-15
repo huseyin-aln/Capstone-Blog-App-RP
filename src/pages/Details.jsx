@@ -8,14 +8,12 @@ import TextField from "@mui/material/TextField";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubble";
 import Container from "@mui/material/Container";
-import { useNavigate, useLocation, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-// import { DeleteBlog, LikeBlog } from "../helpers/firebase";
 import placeholder from "../assets/placeholder.png";
-import { toastSuccessNotify } from "../helpers/toastNotify";
 import noData from "../assets/no-data.png";
 import { BlogContext } from "../contexts/BlogContext";
 import moment from "moment";
@@ -34,8 +32,6 @@ const Details = () => {
 
   const result = getOneBlog(id);
   // console.log(result);
-
-  // const blogCard = useLocation();
 
   const updateHandler = (id) => {
     navigate(`/updateBlog/${id}`);
@@ -206,9 +202,6 @@ const Details = () => {
           display: "flex",
           flexDirection: "column",
           marginTop: "1rem",
-
-          // justifyContent: "center",
-          // alignItems: "center",
         }}
       >
         <Typography
@@ -229,9 +222,6 @@ const Details = () => {
                 fontFamily: "Girassol",
                 marginTop: "1rem",
                 border: "1px solid lightgrey",
-
-                // justifyContent: "center",
-                // alignItems: "center",
               }}
               key={id}
             >
@@ -261,7 +251,6 @@ const Details = () => {
           required
           fullWidth
           id="comment"
-          // label="User Name"
           name="comment"
           autoComplete="comment"
           value={newComment}

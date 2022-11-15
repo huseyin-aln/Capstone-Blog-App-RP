@@ -26,7 +26,7 @@ export default function BlogCard({ post }) {
     publish_date,
     title,
   } = post;
-  // const { id } = useParams();
+
   const navigate = useNavigate();
   const { currentUser } = useContext(AuthContext);
 

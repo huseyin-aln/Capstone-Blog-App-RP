@@ -9,11 +9,8 @@ import Menu from "@mui/material/Menu";
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 import { AuthContext } from "../contexts/AuthContext";
-// import { logOut } from "../helpers/firebase";
-
 
 export default function Navbar() {
-  
   const [anchorEl, setAnchorEl] = useState(null);
 
   const { currentUser, logOut } = useContext(AuthContext);
@@ -26,8 +23,6 @@ export default function Navbar() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-
 
   return (
     <Box sx={{ flexGrow: 1 }}>

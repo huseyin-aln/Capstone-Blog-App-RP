@@ -10,7 +10,6 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
-// import { createUser } from "../helpers/firebase";
 import blogPng from "../assets/blok.png";
 import { AuthContext } from "../contexts/AuthContext";
 
@@ -35,7 +34,6 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function Register() {
-  
   const { createUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -49,8 +47,6 @@ export default function Register() {
   const handleSubmit = (event) => {
     event.preventDefault();
     createUser(email, password, firstName, lastName, userName, navigate);
-    // const displayName = `${firstName} ${lastName}`;
-    // createUser(email, password, navigate, displayName);
   };
 
   return (
@@ -111,7 +107,6 @@ export default function Register() {
                 sx={{ mt: 3, p: 5 }}
               >
                 <Grid container spacing={2}>
-
                   <Grid item xs={12}>
                     <TextField
                       autoComplete="given-name"

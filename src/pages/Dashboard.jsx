@@ -5,18 +5,10 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-// import { useFetch } from "../helpers/firebase";
-// import { AuthContext } from "../contexts/AuthContext";
 import { BlogContext } from "../contexts/BlogContext";
 
 const Dashboard = () => {
-  // const { currentUser } = useContext(AuthContext);
   const { currentBlogs } = useContext(BlogContext);
-  // const { isLoading, blogList } = useFetch();
-
-  // useEffect(() => {
-  //   mainBlogs();
-  // }, []);
 
   return (
     <div>
@@ -49,14 +41,7 @@ const Dashboard = () => {
               sx={{ paddingTop: "2rem" }}
             >
               {currentBlogs?.map((item, id) => (
-                <Grid
-                  item
-                  xs={12}
-                  sm={6}
-                  md={4}
-                  // spacing={2}
-                  key={id}
-                >
+                <Grid item xs={12} sm={6} md={4} key={id}>
                   <BlogCard post={item} />
                 </Grid>
               ))}

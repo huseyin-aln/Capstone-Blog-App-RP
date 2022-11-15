@@ -2,25 +2,14 @@ import { useContext, useEffect, useMemo, useState } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-// import { UpdateBlogCard } from "../helpers/firebase";
-import { useNavigate, useLocation, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 import placeholder from "../assets/placeholder.png";
 import Typography from "@mui/material/Typography";
 import { Container } from "@mui/system";
-import { toastSuccessNotify, toastErrorNotify } from "../helpers/toastNotify";
 import { BlogContext } from "../contexts/BlogContext";
 
 export default function UpdateBlog() {
-  // const blogCard = useLocation();
-
-  // const [updateBlog, setUpdateBlog] = useState(blogCard.state.state);
-  // const [newBlogTitle, setNewBlogTitle] = useState(updateBlog.title);
-  // const [newBlogImage, setNewBlogImage] = useState(updateBlog.image);
-  // const [newBlogContent, setNewBlogContent] = useState(updateBlog.content);
-
-  // const date = new Date().toString().split(" ").slice(0, 4);
-
   const { currentUser } = useContext(AuthContext);
   const { getOneBlog, updateBlog } = useContext(BlogContext);
   const navigate = useNavigate();
@@ -30,7 +19,6 @@ export default function UpdateBlog() {
     title: "",
     content: "",
     image: "",
-    // updated_date: Date.now(),
   });
   const { id } = useParams();
 
@@ -39,7 +27,7 @@ export default function UpdateBlog() {
   const res = useMemo(() => {
     return result ? result[0] : { title: "", content: "", image: "" };
   }, [result]);
-  console.log(res);
+  // console.log(res);
 
   useEffect(() => {
     setNewBlog(res);
@@ -55,31 +43,8 @@ export default function UpdateBlog() {
       newBlog.image
     );
     navigate(`/`);
-    console.log(newBlog);
+    // console.log(newBlog);
   };
-
-  // useEffect(() => {
-  //   setUpdateBlog(blogCard.state.state)
-  // }, [blogCard.state.state]);
-
-  // const editBlog = (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const info = {
-  //       title: newBlogTitle,
-  //       image: newBlogImage,
-  //       content: newBlogContent,
-  //       date: date,
-  //       // author: currentUser.email,
-  //       id: updateBlog.id,
-  //     };
-  //     // UpdateBlogCard(info);
-  //     navigate("/");
-  //     toastSuccessNotify("Blog updated successfully!");
-  //   } catch (error) {
-  //     toastErrorNotify("Blog can not be updated!");
-  //   }
-  // };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -133,7 +98,6 @@ export default function UpdateBlog() {
             type="text"
             name="title"
             defaultValue={res?.title}
-            // value={title}
             sx={{ width: "20rem" }}
             onChange={(e) => setNewBlog({ ...newBlog, title: e.target.value })}
           />
@@ -144,7 +108,6 @@ export default function UpdateBlog() {
             type="text"
             name="image"
             defaultValue={res?.image}
-            // value={image}
             sx={{ width: "20rem" }}
             onChange={(e) => setNewBlog({ ...newBlog, image: e.target.value })}
           />
@@ -155,7 +118,6 @@ export default function UpdateBlog() {
             label="Content"
             name="content"
             defaultValue={res?.content}
-            // value={content}
             multiline
             rows={6}
             sx={{ width: "20rem" }}

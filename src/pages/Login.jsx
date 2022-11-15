@@ -10,8 +10,6 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
-// import { signIn } from "../helpers/firebase";
-// import { signUpProvider } from "../helpers/firebase";
 import blogPng from "../assets/blok.png";
 import { AuthContext } from "../contexts/AuthContext";
 
@@ -46,7 +44,6 @@ export default function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     signIn(email, password, userName, navigate);
-    // signIn(email, password, navigate);
   };
 
   return (
