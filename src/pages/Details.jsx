@@ -200,6 +200,60 @@ const Details = () => {
         </div>
       )}
 
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          marginTop: "1rem",
+
+          // justifyContent: "center",
+          // alignItems: "center",
+        }}
+      >
+        <Typography
+          variant="h4"
+          align="center"
+          color="primary"
+          sx={{ fontFamily: "Girassol" }}
+        >
+          Comments
+        </Typography>
+
+        {result[0]?.comments?.map((comment, id) => {
+          return (
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                fontFamily: "Girassol",
+                marginTop: "1rem",
+                border: "1px solid lightgrey",
+
+                // justifyContent: "center",
+                // alignItems: "center",
+              }}
+              key={id}
+            >
+              <Typography
+                variant="h6"
+                color="primary"
+                sx={{ fontFamily: "Girassol", marginLeft: "1rem" }}
+              >
+                {comment.user} :
+              </Typography>
+
+              <Typography
+                variant="body"
+                color="primary"
+                sx={{ fontFamily: "Girassol", marginLeft: "1rem" }}
+              >
+                {comment.content}
+              </Typography>
+            </Box>
+          );
+        })}
+      </Box>
+
       <Box component="form" onSubmit={handleSendComment} sx={{ mt: 1 }}>
         <TextField
           margin="normal"
