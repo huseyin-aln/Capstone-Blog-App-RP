@@ -93,7 +93,7 @@ export default function BlogCard({ post }) {
 
         <CardActions>
           <IconButton aria-label="add to favorites">
-            <FavoriteIcon color={likes > 0 ? "error" : "disabled"} />
+            <FavoriteIcon color={likes?.length > 0 ? "error" : "disabled"} />
           </IconButton>
           <Typography variant="body2" color="textSecondary">
             {likes?.length}

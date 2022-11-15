@@ -23,22 +23,19 @@ const Details = () => {
   const { currentUser } = useContext(AuthContext);
   const { getOneBlog, deleteBlog, addLike, addComment } =
     useContext(BlogContext);
+
   const [newComment, setNewComment] = useState("");
   const [like, setLike] = useState("");
-
   const navigate = useNavigate();
   const { id } = useParams();
-  // console.log(id);
 
   const result = getOneBlog(id);
-  // console.log(result);
 
   const updateHandler = (id) => {
     navigate(`/updateBlog/${id}`);
   };
 
   const deleteHandler = (id) => {
-    // console.log("DeleteHandler", id);
     deleteBlog(id);
     navigate("/");
   };
@@ -141,7 +138,9 @@ const Details = () => {
                   }}
                   data-id={item?.id}
                 >
-                  <FavoriteIcon color={item.likes > 0 ? "error" : "disabled"} />
+                  <FavoriteIcon
+                    color={item.likes.length > 0 ? "error" : "disabled"}
+                  />
                 </IconButton>
                 <Typography variant="body2" color="textSecondary">
                   {item?.likes?.length}
