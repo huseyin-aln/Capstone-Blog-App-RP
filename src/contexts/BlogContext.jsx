@@ -9,7 +9,8 @@ import { AuthContext } from "./AuthContext";
 
 export const BlogContext = createContext();
 
-const url = "http://127.0.0.1:8000/";
+// const url = "http://127.0.0.1:8000/";
+const url = "https://haln.pythonanywhere.com/";
 
 const BlogContextProvider = ({ children }) => {
   const { myKey } = useContext(AuthContext);
@@ -22,7 +23,7 @@ const BlogContextProvider = ({ children }) => {
       // console.log(res.data[0].id);
       if (res.status === 200) {
         setCurrentBlogs(res.data);
-        // console.log(res.data);
+        console.log(res.data);
       }
     } catch (error) {
       toastErrorNotify("Something went wrong!");
@@ -90,22 +91,11 @@ const BlogContextProvider = ({ children }) => {
 
   const updateBlog = async (id, data, navigate) => {
     try {
-      const res = await axios.patch(
-        `${url}blog/blog/${id}/`,
-        data,
-        // {
-        //   id: id,
-        //   author: author,
-        //   title: title,
-        //   content: content,
-        //   image: image,
-        // },
-        {
-          headers: {
-            Authorization: `Token ${myKey}`,
-          },
-        }
-      );
+      const res = await axios.patch(`${url}blog/blog/${id}/`, data, {
+        headers: {
+          Authorization: `Token ${myKey}`,
+        },
+      });
       if (res.status === 200) {
         toastSuccessNotify("Updated successfully!");
         navigate("/");
@@ -150,7 +140,7 @@ const BlogContextProvider = ({ children }) => {
 
   useEffect(() => {
     mainBlogs();
-  }, [currentBlogs]);
+  }, []);
 
   let value = {
     addBlog,

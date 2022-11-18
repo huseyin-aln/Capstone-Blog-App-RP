@@ -4,7 +4,8 @@ import { toastErrorNotify, toastSuccessNotify } from "../helpers/toastNotify";
 
 export const AuthContext = createContext();
 
-const url = "http://127.0.0.1:8000/";
+// const url = "http://127.0.0.1:8000/";
+const url = "https://haln.pythonanywhere.com/";
 
 const AuthContextProvider = (props) => {
   const [currentUser, setCurrentUser] = useState(

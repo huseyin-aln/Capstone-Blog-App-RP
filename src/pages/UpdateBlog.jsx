@@ -36,17 +36,7 @@ export default function UpdateBlog() {
 
   const updateBlogHandler = (e) => {
     e.preventDefault();
-    updateBlog(
-      res?.id,
-      newBlog,
-      // newBlog.author,
-      // newBlog.title,
-      // newBlog.content,
-      // newBlog.image,
-      navigate
-    );
-    // navigate(`/`);
-    // console.log(newBlog);
+    updateBlog(res?.id, newBlog, navigate);
   };
 
   return (
