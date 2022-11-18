@@ -15,6 +15,7 @@ export default function UpdateBlog() {
   const navigate = useNavigate();
 
   const [newBlog, setNewBlog] = useState({
+    id: "",
     author: currentUser.email,
     title: "",
     content: "",
@@ -31,18 +32,20 @@ export default function UpdateBlog() {
 
   useEffect(() => {
     setNewBlog(res);
-  }, [res]);
+  }, []);
 
   const updateBlogHandler = (e) => {
     e.preventDefault();
     updateBlog(
       res?.id,
-      newBlog.author,
-      newBlog.title,
-      newBlog.content,
-      newBlog.image
+      newBlog,
+      // newBlog.author,
+      // newBlog.title,
+      // newBlog.content,
+      // newBlog.image,
+      navigate
     );
-    navigate(`/`);
+    // navigate(`/`);
     // console.log(newBlog);
   };
 

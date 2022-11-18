@@ -88,17 +88,18 @@ const BlogContextProvider = ({ children }) => {
     }
   };
 
-  const updateBlog = async (id, author, title, content, image) => {
+  const updateBlog = async (id, data, navigate) => {
     try {
       const res = await axios.patch(
         `${url}blog/blog/${id}/`,
-        {
-          id: id,
-          author: author,
-          title: title,
-          content: content,
-          image: image,
-        },
+        data,
+        // {
+        //   id: id,
+        //   author: author,
+        //   title: title,
+        //   content: content,
+        //   image: image,
+        // },
         {
           headers: {
             Authorization: `Token ${myKey}`,
@@ -107,6 +108,7 @@ const BlogContextProvider = ({ children }) => {
       );
       if (res.status === 200) {
         toastSuccessNotify("Updated successfully!");
+        navigate("/");
       } else toastWarnNotify("Someting went wrong please try again!");
     } catch (error) {
       // console.log(error.response);
@@ -148,7 +150,7 @@ const BlogContextProvider = ({ children }) => {
 
   useEffect(() => {
     mainBlogs();
-  }, []);
+  }, [currentBlogs]);
 
   let value = {
     addBlog,

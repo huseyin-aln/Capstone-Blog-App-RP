@@ -55,6 +55,7 @@ const Details = () => {
     };
     addComment(data, id);
     setNewComment("");
+    navigate("/");
   };
 
   return (
