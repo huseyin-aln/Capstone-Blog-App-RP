@@ -28,7 +28,6 @@ export default function UpdateBlog() {
   const res = useMemo(() => {
     return result ? result[0] : { title: "", content: "", image: "" };
   }, [result]);
-  // console.log(res);
 
   useEffect(() => {
     setNewBlog(res);

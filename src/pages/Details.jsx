@@ -30,7 +30,6 @@ const Details = () => {
   const { id } = useParams();
 
   const result = getOneBlog(id);
-  // console.log(result);
 
   const updateHandler = (id) => {
     navigate(`/updateBlog/${id}`);
