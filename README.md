@@ -2,7 +2,7 @@
 
 <div align="center">
   <h3>
-    <a href="https://https://django-blog-app.netlify.app//">
+    <a href="https://django-blog-app.netlify.app//">
       Django-React Blog App
     </a>
  
